@@ -1,0 +1,18 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "0.0.0.0:7860:7860"
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "0.0.0.0:8501:8501"
+    depends_on:
+      - backend
+    # This runs inside the dev container workspace environment to configure the host visibility
+    # Adjust "streamlit run app.py" to match your actual frontend startup command
+    #command: >
+    #  sh -c "gh codespace ports visibility 7860:public 8501:public && streamlit run app.py"
